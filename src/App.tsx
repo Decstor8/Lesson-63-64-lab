@@ -1,33 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import AppBar from './components/AppBar/AppBar';
+import {Route, Routes} from 'react-router-dom';
+import Posts from './containers/Posts/Posts';
+import NewPost from './containers/NewPost/NewPost';
+import Post from './containers/Post/Post';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <AppBar />
+      </header>
+      <main className='container-fluid'>
+        <Routes>
+          <Route path='/' element={<Posts />} />
+          <Route path='/new-post' element={<NewPost />} />
+          <Route path='/posts/:id' element={<Post />} />
+          <Route path='/posts/:id/edit' element={<NewPost />} />
+          <Route path='*' element={<h1>Not Found</h1>} />
+        </Routes>
+      </main>
     </>
   )
 }
